@@ -22,6 +22,9 @@ GitHub Flavored Markdown [fenced code blocks](https://help.github.com/articles/c
   width: 100%;
 }
 ```
+```css
+what is this
+```
 
 ```html
 {% raw %}<nav class="pagination" role="navigation">

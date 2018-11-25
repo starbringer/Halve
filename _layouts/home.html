@@ -8,6 +8,12 @@ layout: compress
 <body id="homepage">
 
   <div class="block-left">
+	 <div class="cover">
+      <div class="clock"></div>
+      <div class='hours'></div>
+      <div class='seconds'></div>
+      <div class='minutes'></div>
+    </div>
     <div class="content">
       <div class="main-info">
         <a href="{{ site.url }}" class="logo"><img src="{{ site.url }}/images/{{ site.logo }}"></a>
@@ -26,10 +32,10 @@ layout: compress
   <div class="block-right">
     <a href="{{ site.url }}/posts" title="posts" class="posts-menu-icon"></a>
     <span class="posts-link">POSTS</span>
-    <a title="project" class="projects-menu-icon">
+<!--     <a title="project" class="projects-menu-icon">
       <span></span>
-    </a>
-    <span class="projects-link">PROJECTS</span>
+    </a> -->
+    <!-- <span class="projects-link">PROJECTS</span> -->
     <div class="content">
       <div class="about-info">
         {{ content }}
@@ -39,5 +45,33 @@ layout: compress
   {% include overlay.html %}
   {% include scripts.html %}
   <script src="{{ site.url }}/assets/js/canvas.js"></script>
+  <script>
+  setInterval(function() {
+    var seconds = new Date().getSeconds();
+    var sdegree = seconds * 6 + 270;
+    seconds = ("0" + seconds).slice(-2);
+    var secondSel = document.querySelector(".seconds");
+    secondSel.style.transform = "rotate(" + sdegree + "deg) translate(160px) rotate(-" + sdegree + "deg)";
+    secondSel.innerHTML = seconds;
+    var minutes = new Date().getMinutes();
+    var mdegree = minutes * 6 + 270;
+    var minutesSel = document.querySelector(".minutes");
+    minutes = ("0" + minutes).slice(-2);
+    minutesSel.style.transform = "rotate(" + mdegree + "deg) translate(181px) rotate(-" + mdegree + "deg)";
+    minutesSel.innerHTML =  minutes;
+    var hours = new Date().getHours();
+    var hoursSel = document.querySelector(".hours");
+    if (hours > 12) {
+      hours = hours - 12;
+    }
+    hours = ("0" + hours).slice(-2);
+    hoursSel.innerHTML = hours;
+  }, 1000);
+  var btnSel = document.querySelector('.btn');
+  var header = document.getElementsByTagName('header')[0];
+  btnSel.addEventListener("click", function() {
+    header.scrollIntoView();
+  }, false);
+</script>
 </body>
 </html>
